@@ -19,6 +19,8 @@ const Users = () => {
     if (number === 0) {
       const table = document.querySelector(".table");
       table.textContent = "";
+      const badge = document.querySelector(".badge");
+      badge.textContent = "Никто с тобой не тусанет";
     }
     return (
       <h2>
