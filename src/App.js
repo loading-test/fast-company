@@ -14,12 +14,17 @@ const App = () => {
     );
   };
   const handleToggleBookMark = (id) => {
-    setUsers(users.filter((user) => {
-        if (user._id === id) { user.bookmark = !user.bookmark; return user }
-        return user
-    }))
-    console.log(id)
-}
+    setUsers(
+      users.filter((user) => {
+        if (user._id === id) {
+          user.bookmark = !user.bookmark;
+          return user;
+        }
+        return user;
+      })
+    );
+    console.log(id);
+  };
 
   return (
     <div>
