@@ -12,6 +12,16 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             onSort({ path: item, order: "asc" });
         }
     };
+    const buttonSort = (selectedSort, currentPath) => {
+        if (selectedSort.path === currentPath) {
+            if (selectedSort.order === "asc") {
+                return <i className="bi bi-caret-up-fill"></i>;
+            } else {
+                return <i className="bi bi-caret-down-fill"></i>;
+            }
+        }
+        return null;
+    };
     return (
         <thead>
             <tr>
@@ -23,29 +33,15 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                                 ? () => handleSort(columns[colum].path)
                                 : undefined
                         }
-                        {...{ role: columns[colum].path && "button" }}
+                        {...{
+                            role: columns[colum].path && "button"
+                        }}
                         scope="col"
                     >
                         {columns[colum].name}
+                        {buttonSort(selectedSort, columns[colum].path)}
                     </th>
                 ))}
-                {/* <th onClick={() => handleSort("name")} scope="col">
-                    Имя
-                </th>
-                <th scope="col">Качества</th>
-                <th onClick={() => handleSort("profession.name")} scope="col">
-                    Провфессия
-                </th>
-                <th onClick={() => handleSort("completedMeetings")} scope="col">
-                    Встретился, раз
-                </th>
-                <th onClick={() => handleSort("rate")} scope="col">
-                    Оценка
-                </th>
-                <th onClick={() => handleSort("bookmark")} scope="col">
-                    Избранное
-                </th>
-                <th /> */}
             </tr>
         </thead>
     );

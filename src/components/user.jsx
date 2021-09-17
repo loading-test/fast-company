@@ -1,7 +1,7 @@
 import React from "react";
-import Qualitie from "./qualitie";
 import BookMark from "./bookmark";
 import PropTypes from "prop-types";
+import Quality from "./quality";
 
 const User = ({
     _id,
@@ -19,7 +19,7 @@ const User = ({
             <td>{name} </td>
             <td>
                 {qualities.map((qual) => (
-                    <Qualitie {...qual} key={qual._id} />
+                    <Quality {...qual} key={qual._id} />
                 ))}
             </td>
             <td>{profession.name}</td>
