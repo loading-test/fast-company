@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Pagination from "./pagination";
 import { paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
-import GroupList from "./groupList";
+import GroupList from "../components/groupList";
 import api from "../api";
-import SearchStatus from "./searchStatus";
+import SearchStatus from "../components/searchStatus";
 import _ from "lodash";
-import UserTable from "./usersTable";
+import UserTable from "../components/usersTable";
+import Pagination from "../components/pagination";
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +48,6 @@ const Users = () => {
                 return user;
             })
         );
-        console.log(id);
     };
 
     const handleProfessionSelect = (item) => {
