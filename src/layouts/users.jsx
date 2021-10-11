@@ -7,6 +7,7 @@ import SearchStatus from "../components/searchStatus";
 import _ from "lodash";
 import UserTable from "../components/usersTable";
 import Pagination from "../components/pagination";
+import Search from "../components/search";
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -97,7 +98,8 @@ const Users = () => {
                     </div>
                 )}
                 <div className="d-flex flex-column">
-                    <SearchStatus length={count} />
+                    <SearchStatus length={count} users={users} />
+                    <Search />
                     {count > 0 && (
                         <UserTable
                             users={usersCrop}
