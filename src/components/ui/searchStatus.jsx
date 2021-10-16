@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SearchStatus = ({ length, users }) => {
+const SearchStatus = ({ length }) => {
     const renderPhrase = (number) => {
         const lastOne = Number(number.toString().slice(-1));
         if (number > 4 && number < 15) {
