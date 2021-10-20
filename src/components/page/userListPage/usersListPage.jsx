@@ -10,6 +10,7 @@ import Pagination from "../../common/pagination";
 import SearchStatus from "../../ui/searchStatus";
 
 const UsersListPage = () => {
+  const [users, setUsers] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [professions, setProfession] = useState();
   const [selectedProf, setSelectedProf] = useState();
@@ -18,19 +19,9 @@ const UsersListPage = () => {
 
   const pageSize = 8;
 
-  const [users, setUsers] = useState();
-
   useEffect(() => {
     api.users.fetchAll().then((data) => setUsers(data));
   }, []);
-
-  const handleDelete = (userId) => {
-    setUsers(
-      users.filter((user) => {
-        return user._id !== userId;
-      })
-    );
-  };
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfession(data));
@@ -39,6 +30,14 @@ const UsersListPage = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedProf]);
+
+  const handleDelete = (userId) => {
+    setUsers(
+      users.filter((user) => {
+        return user._id !== userId;
+      })
+    );
+  };
 
   const handleToggleBookMark = (id) => {
     setUsers(
@@ -137,7 +136,7 @@ const UsersListPage = () => {
       </div>
     );
   }
-  return "loading...";
+  return <h3>loading...</h3>;
 };
 UsersListPage.propTypes = {
   users: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),

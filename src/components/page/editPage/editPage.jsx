@@ -47,7 +47,6 @@ const EditPage = ({ userId }) => {
         }
       }
     }
-    console.log(newQualities);
     return newQualities;
   };
 
@@ -92,7 +91,7 @@ const EditPage = ({ userId }) => {
         profession: getProfessionById(user.profession),
         qualities: getQualitiesById(user.qualities),
       })
-      .then((user) => history.replace(`/users/${user._id}`));
+      .then((user) => history.push(`/users/${user._id}`));
   };
 
   const isValid = Object.keys(errors).length === 0;
@@ -156,7 +155,7 @@ const EditPage = ({ userId }) => {
       </div>
     );
   }
-  return "Loading...";
+  return <h3>Loading...</h3>;
 };
 EditPage.propTypes = {
   userId: PropTypes.string,

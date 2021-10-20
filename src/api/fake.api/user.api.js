@@ -21,12 +21,12 @@ const qualities = {
     color: "danger",
   },
   handsome: {
-    _id: "67rdca3eeb7f6fgeed471103",
+    _id: "67rdca3eeb7f6fgeed471102",
     name: "Красавчик",
     color: "info",
   },
   uncertain: {
-    _id: "67rdca3eeb7f6fgeed471102",
+    _id: "67rdca3eeb7f6fgeed471103",
     name: "Неуверенный",
     color: "dark",
   },
@@ -150,9 +150,8 @@ const fetchAll = () =>
   new Promise((resolve) => {
     window.setTimeout(function () {
       resolve(JSON.parse(localStorage.getItem("users")));
-    }, 2000);
+    }, 1000);
   });
-
 const update = (id, data) =>
   new Promise((resolve) => {
     const users = JSON.parse(localStorage.getItem("users"));
