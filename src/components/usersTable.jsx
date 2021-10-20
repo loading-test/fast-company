@@ -12,6 +12,7 @@ const UserTable = ({
   onToggleBookMark,
   onDelete,
 }) => {
+  
   const columns = {
     name: {
       path: "name",
