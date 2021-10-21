@@ -1,5 +1,6 @@
 import React from "react";
 import SelectField from "../../../common/form/selectField";
+import PropTypes from "prop-types";
 
 const NewComment = ({ users, onChange }) => {
   // const [users, setUsers] = useState();
@@ -32,14 +33,17 @@ const NewComment = ({ users, onChange }) => {
             id="floatingTextarea2"
             rows="3"
           ></textarea>
-         
         </div>
         <div className="text-end">
-        <button className="btn btn-primary mt-3">Опубликовать</button>
+          <button className="btn btn-primary mt-3">Опубликовать</button>
         </div>
       </div>
     </div>
   );
+};
+NewComment.propTypes = {
+  user: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  onChange: PropTypes.func,
 };
 
 export default NewComment;

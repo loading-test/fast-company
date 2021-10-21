@@ -9,7 +9,7 @@ import CommentsList from "./comments/commentsList";
 
 const UserPage = ({ id }) => {
   const [user, setUser] = useState();
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState();
 
   useEffect(() => {
     api.users.getById(id).then((data) => setUser(data));
@@ -24,7 +24,6 @@ const UserPage = ({ id }) => {
     }));
   };
 
-
   if (user) {
     return (
       <div className="container">
@@ -36,7 +35,7 @@ const UserPage = ({ id }) => {
           </div>
           <div className="col-md-8">
             <NewComment users={users} onChange={handleChange} />
-            <CommentsList />
+            <CommentsList user={user} />
           </div>
         </div>
       </div>
