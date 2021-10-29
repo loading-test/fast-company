@@ -30,9 +30,9 @@ const NewComment = ({ addComment }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    api.comments.add(value);
-    addComment(value);
-    setValue({ content: "", userId: "" });
+    api.comments.add(value).then((newCommentn) => addComment(newCommentn));
+    // addComment(value);
+    setValue({ content: "", userId: "", pageId: userId });
   };
 
   const arrayOfUsers =
