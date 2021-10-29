@@ -14,6 +14,7 @@ const EditPage = ({ userId }) => {
   const [professions, setProfessions] = useState();
   const [qualities, setQualities] = useState();
   const [errors, setErrors] = useState({});
+
   useEffect(() => {
     api.users.getById(userId).then((user) =>
       setUser({
@@ -94,11 +95,16 @@ const EditPage = ({ userId }) => {
       .then((user) => history.push(`/users/${user._id}`));
   };
 
+  const clickBack = () => {
+    history.push(`/users/${user._id}`)
+  }
+
   const isValid = Object.keys(errors).length === 0;
 
   if (user) {
     return (
       <div className="container mt-5">
+        <button className="btn btn-primary" onClick={clickBack}>Назад</button>
         <div className="row">
           <div className="col-md-6 offset-md-3 shadow p-5">
             <form onSubmit={handleSubmit}>

@@ -4,25 +4,14 @@ import PropTypes from "prop-types";
 import UserCard from "./userCard";
 import QualitiesCard from "./qualitiesCard";
 import MeetingsCard from "./meetingsCard";
-import NewComment from "./comments/newComment";
 import CommentsList from "./comments/commentsList";
 
 const UserPage = ({ id }) => {
   const [user, setUser] = useState();
-  const [users, setUsers] = useState();
 
   useEffect(() => {
     api.users.getById(id).then((data) => setUser(data));
-    api.users.fetchAll().then((data) => setUsers(data));
   }, []);
-
-  const handleChange = (target) => {
-    console.log(target.name, target.value);
-    setUsers((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }));
-  };
 
   if (user) {
     return (
@@ -34,8 +23,7 @@ const UserPage = ({ id }) => {
             <MeetingsCard user={user} />
           </div>
           <div className="col-md-8">
-            <NewComment users={users} onChange={handleChange} />
-            <CommentsList user={user} />
+            <CommentsList userId={id} />
           </div>
         </div>
       </div>

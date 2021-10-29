@@ -1,45 +1,50 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import api from "../../../../api";
+import Comment from "./Comment";
+import PropTypes from "prop-types"
+import NewComment from "./newComment";
+import _ from "lodash";
 
-const CommentsList = ({ user }) => {
-  return (
-    <div className="card mb-3">
-      <div className="card-body ">
-        <h2>Comments</h2>
-        <hr />
-        <div className="d-flex flex-start ">
-          <img
-            src={`https://avatars.dicebear.com/api/avataaars/${(
-              Math.random() + 1
-            )
-              .toString(36)
-              .substring(7)}.svg`}
-            className="rounded-circle shadow-1-strong me-3"
-            alt="avatar"
-            width="65"
-            height="65"
-          />
-          <div className="flex-grow-1 flex-shrink-1">
-            <div className="mb-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="mb-1 ">
-                  {user.name}
-                  <span className="small">//Published Time</span>
-                </p>
-                <button className="btn btn-sm text-primary d-flex align-items-center">
-                  <i className="bi bi-x-lg"></i>
-                </button>
-              </div>
-              <p className="small mb-0">//Comment content</p>
+const CommentsList = ({ userId }) => {
+    const [comment, setComment] = useState();
+
+    useEffect(() => {
+        api.comments
+            .fetchCommentsForUser(userId)
+            .then((data) => setComment(data));
+    }, []);
+    console.log(comment);
+
+    const addComment = (com) => {
+        setComment([...comment, com])
+    }
+
+    const handleRemoveComment = (id) => {
+       api.comments.remove(id).then((id) => setComment(comment.filter((x) => x._id !== id)))
+    };
+
+    const sortedComment = _.orderBy(comment, ["created_at"], ["desc"])
+
+    if (comment) {
+        return (
+            <>
+            <NewComment addComment={addComment} />
+            <div className="card mb-3">
+                <div className="card-body ">
+                    <h2>Comments</h2>
+                    <hr />
+                    {sortedComment.map((data) => (
+                        <Comment data={data} onRemove={handleRemoveComment} key={data._id} />
+                    ))}
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+            </>
+        );
+    }
+    return "Loading";
 };
-CommentsList.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-};
+CommentsList.propTypes ={
+    id: PropTypes.string
+}
 
 export default CommentsList;
