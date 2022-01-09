@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { validator } from "../../utils/validator";
+import { validator } from "../../utils/ validator";
 import TextField from "../common/form/textField";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radio.Field";
@@ -17,6 +17,7 @@ const RegisterForm = () => {
         password: "",
         profession: "",
         sex: "male",
+        name: "",
         qualities: [],
         licence: false
     });
@@ -31,7 +32,6 @@ const RegisterForm = () => {
         label: p.name,
         value: p._id
     }));
-
     const [errors, setErrors] = useState({});
 
     const handleChange = (target) => {
@@ -47,6 +47,15 @@ const RegisterForm = () => {
             },
             isEmail: {
                 message: "Email введен некорректно"
+            }
+        },
+        name: {
+            isRequired: {
+                message: "Имя обязательно для заполнения"
+            },
+            min: {
+                message: "Имя должно составлять минимум из 3 символов",
+                value: 3
             }
         },
         password: {
@@ -101,6 +110,7 @@ const RegisterForm = () => {
             setErrors(error);
         }
     };
+
     return (
         <form onSubmit={handleSubmit}>
             <TextField
@@ -109,6 +119,13 @@ const RegisterForm = () => {
                 value={data.email}
                 onChange={handleChange}
                 error={errors.email}
+            />
+            <TextField
+                label="Имя"
+                name="name"
+                value={data.name}
+                onChange={handleChange}
+                error={errors.name}
             />
             <TextField
                 label="Пароль"
