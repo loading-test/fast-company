@@ -23,7 +23,7 @@ const Comments = () => {
     const comments = useSelector(getComments());
 
     const handleSubmit = (data) => {
-        dispatch(createComments(data, userId));
+        dispatch(createComments({ pageId: userId, ...data }));
     };
     const handleRemoveComment = (id) => {
         dispatch(removeComments(id));
