@@ -21,10 +21,10 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-    const history = useHistory();
     const [currentUser, setUser] = useState();
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(true);
+    const history = useHistory();
 
     async function logIn({ email, password }) {
         try {
@@ -58,10 +58,21 @@ const AuthProvider = ({ children }) => {
     function logOut() {
         localStorageService.removeAuthData();
         setUser(null);
+        console.log("push");
         history.push("/");
     }
     function randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    async function updateUserData(data) {
+        const { content } = await userService.update(data);
+        setUser(content);
+        try {
+            const { content } = await userService.update(data);
+            setUser(content);
+        } catch (error) {
+            errorCatcher(error);
+        }
     }
     async function signUp({ email, password, ...rest }) {
         try {
@@ -71,7 +82,6 @@ const AuthProvider = ({ children }) => {
                 returnSecureToken: true
             });
             setTokens(data);
-
             await createUser({
                 _id: data.localId,
                 email,
@@ -102,14 +112,6 @@ const AuthProvider = ({ children }) => {
         try {
             const { content } = await userService.create(data);
             console.log(content);
-            setUser(content);
-        } catch (error) {
-            errorCatcher(error);
-        }
-    }
-    async function updateUserData(data) {
-        try {
-            const { content } = await userService.updateCurrentUser(data);
             setUser(content);
         } catch (error) {
             errorCatcher(error);
